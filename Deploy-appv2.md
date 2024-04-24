@@ -242,7 +242,9 @@ sudo systemctl enable mongod
 ```
 ## Blockers
 
-Reflecting on my journey, I've faced several blockers that taught me valuable lessons. Running the app before configuring the database led to unexpected errors, highlighting the importance of thorough preparation. Using the wrong IP for the database host resulted in connection issues, emphasising the need for attention to detail. Neglecting to use sudo when installing PM2 led to permission denied errors, reinforcing the importance of system permissions.
+- Reflecting on my journey, I've faced several blockers that taught me valuable lessons. Running the app before configuring the database led to unexpected errors,such as my database not connecting. Using the wrong IP for the database host resulted in connection issues, emphasising the need for attention to detail. Not using sudo when installing PM2 led to permission denied errors, highlighting the importance of system permissions.
+
+    Majority of these issues were simple fixes but it highlighted the need to be through and not rush through in installing the app and connecting the database.
 
 
 
