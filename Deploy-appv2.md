@@ -18,6 +18,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 ```bash
 sudo apt install nginx -y
 ```
+## Configure reverse proxy
+```bash
+sudo nano /etc/nginx/sites-enabled/default
+```
+- Change "try_files $uri $uri/ =404;" to proxy_pass http://localhost:3000;
+- restart Nginx
 
 ## Restart
 
@@ -50,9 +56,15 @@ node -v
 ```bash
 cd ~/tech258-sparta-test-app/sparta_test_folder/app
 ```
+## set db host env var
+```bash
+export DB_HOST=mongodb://172.31.63.98:27017/posts
+```
+- Make sure you use the private ip on the database intance you launched.
+  
 ## Install the App
 ```bash
-sudo npm install
+npm install
 ```
 ## Run the App
 
@@ -69,7 +81,7 @@ Do it manually and test each stage to make sure its wokring correctly then autom
 #!/bin/bash
 
 echo "Updating..."
-sudo DEBIAN_FRONTEND=noninteractive apt update -y
+sudo apt update -y
 echo "Done!"
 
 echo "Upgrading packages..."
@@ -77,15 +89,17 @@ sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 echo "Done!"
 
 echo "Installing Nginx..."
-sudo apt install nginx -y
+sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y
 echo "Done!"
 
 # Configure reverse proxy
+sudo sed -i '51s/.*/\t  proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-enabled/default
+
 # Change configuration file
 
 echo "Restarting Nginx..."
 sudo systemctl restart nginx
-echo "Done!"
+echo "Done!"ls
 
 echo "Enabling Nginx..."
 sudo systemctl enable nginx
@@ -109,14 +123,29 @@ echo "Git repository cloned!"
 echo "Navigating to the app folder..."
 cd ~/tech258-sparta-test-app/Sparta_test_folder/app
 
+
+# set db host env var
+export DB_HOST=mongodb://172.31.63.98:27017/posts
+
 # Install app dependencies
 echo "Installing app dependencies..."
 npm install
 echo "App dependencies installed!"
 
-# Run the app
-echo "Running the app..."
-npm start app.js
+# Install PM2
+echo "Installing PM2..."
+sudo npm install -g pm2
+echo "PM2 installed"
+
+
+# run the app
+#echo "Running the app with PM2..."
+pm2 start app.js
+echo "App started with PM2!"
+
+
+
+
 ```
 # Deploying a Database 
 
@@ -211,7 +240,9 @@ sudo systemctl restart mongod
 echo Enabling MongoDB...
 sudo systemctl enable mongod
 ```
+## Blockers
 
+Reflecting on my journey, I've faced several blockers that taught me valuable lessons. Running the app before configuring the database led to unexpected errors, highlighting the importance of thorough preparation. Using the wrong IP for the database host resulted in connection issues, emphasising the need for attention to detail. Neglecting to use sudo when installing PM2 led to permission denied errors, reinforcing the importance of system permissions.
 
 
 
