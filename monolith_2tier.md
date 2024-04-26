@@ -1,7 +1,7 @@
 # Monolithic Architecture vs 2-Tier Architecture
 
 ## What is Monolithic Architecture
-
+![Mono](<images/Microservices-vs-Monolithic-Architectures-01 (1).png>)
 - It is a software architecture where the whole application is built as a single unit. All components of the application including the user interface, business logic and the data access layer are tightly integrated and deployed together. 
 ### Advantages
 - Simple to develop and deploy
@@ -11,6 +11,7 @@
 - Flexibility, making changes to the application can be complex as any modification to one part may require of the whole system.
 
 ## What is 2-Tier Architecture
+![2tier](images/Two-Tiera-and-Three-Tierb-Client-Server-Architectures.png)
 - It is a software architecture pattern where the application is divided into two separate tiers or layers: the client tier and the server tier. Each tier has specific responsibilities and interacts with the other tier to accomplish tasks.
 
     Client Tier: This tier represents the user interface and application logic running on the client-side device.

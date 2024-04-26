@@ -137,6 +137,11 @@ echo "Installing PM2..."
 sudo npm install -g pm2
 echo "PM2 installed"
 
+# Stop PM2 process if running
+echo "Stopping PM2 process if running..."
+pm2 stop all
+echo "PM2 process stopped."
+
 
 # run the app
 #echo "Running the app with PM2..."
